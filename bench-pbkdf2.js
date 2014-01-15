@@ -13,7 +13,7 @@ var libs = {
   },
 
   forge: function (alg) {
-    var forge = require('forge')
+    var forge = require('node-forge')
     return function (key, salt, iterations, length) {
       var hash = alg == 'sha256' ? forge.md.sha256.create() : null
       return new Buffer(forge.pbkdf2(key, salt, iterations, length, hash), 'binary').toString('hex')
