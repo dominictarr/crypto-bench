@@ -8,9 +8,11 @@
     "url": "git://github.com/dominictarr/crypto-bench.git"
   },
   "dependencies": {
+    "crypto-js": "~3.1.2-2",
+    "node-forge": "~0.2.23",
+    "sjcl": "git@github.com:dominictarr/sjcl.git#built"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "scripts": {
     "test": "set -e; for t in test/*.js; do node $t; done"
   },
