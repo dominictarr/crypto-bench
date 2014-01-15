@@ -11,13 +11,19 @@ var data = randomData(M)
 
 var libs = {
   'sha.js': function (alg) {
+    var createHash = require('sha.js/browserify')
+    return function (data) {
+      return createHash(alg).update(data).digest('hex')
+    }
+  },
+  'sha.js-buffer': function (alg) {
     var createHash = require('sha.js')
     return function (data) {
       return createHash(alg).update(data).digest('hex')
     }
   },
   forge: function (alg) {
-    var forge = require('forge')
+    var forge = require('node-forge')()
     return function (data) {
       return forge[alg].create().start().update(data.toString('binary')).digest().toHex()
     }
@@ -46,9 +52,12 @@ var libs = {
 var prev = 0
 var hash = libs[lib](alg)
 
-for(var i = 0; i <= 80; i++) {
+//for(var i = 79; i <= 80; i++) {
+var i = 70
+;(function loop () {
+  if(i > 80) return
   var n = Math.round(Math.pow(Math.pow(M, 1/80), i))
-  if(n === prev) continue;
+  if(n === prev) return i++, loop();
   prev = n
   var _data = data.slice(data.length - n, data.length)
   var start = Date.now(), end, _hash, j = 0
@@ -60,4 +69,7 @@ for(var i = 0; i <= 80; i++) {
   var time = end - start
 
   console.log(''+i, n, _data.length, j, time, (_data.length*j)/time, _hash)
-}
+  i++
+  setTimeout(loop, 10)
+})()
+//}
