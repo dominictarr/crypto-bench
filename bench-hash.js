@@ -1,6 +1,6 @@
 
 var args = process.argv.slice(2)
-var lib = args.shift() || 'sha.js'
+var lib = args.shift() || 'crypto-browserify'
 var alg = args.shift() || 'sha1'
 var randomData = require('crypto').pseudoRandomBytes
 var Buffer = require('buffer').Buffer
@@ -10,14 +10,8 @@ var M = 10*1000*1000
 var data = randomData(M)
 
 var libs = {
-  'sha.js': function (alg) {
-    var createHash = require('sha.js/browserify')
-    return function (data) {
-      return createHash(alg).update(data).digest('hex')
-    }
-  },
-  'sha.js-buffer': function (alg) {
-    var createHash = require('sha.js')
+  'crypto-browserify': function (alg) {
+    var createHash = require('crypto-browserify').createHash
     return function (data) {
       return createHash(alg).update(data).digest('hex')
     }
@@ -53,7 +47,7 @@ var prev = 0
 var hash = libs[lib](alg)
 
 //for(var i = 79; i <= 80; i++) {
-var i = 70
+var i = 1
 ;(function loop () {
   if(i > 80) return
   var n = Math.round(Math.pow(Math.pow(M, 1/80), i))

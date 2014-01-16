@@ -1,14 +1,18 @@
 var args = process.argv.slice(2)
-var lib = args.shift() || 'node'
+var lib = args.shift() || 'crypto-browserify'
 var alg = args.shift() || 'sha1'
 var length = parseInt(args.shift() || (alg == 'sha256' ? 32 : 20))
 var libs = {
-  'pbkdf2.js': function (key, salt, iterations, length) {
-    
+  'crypto-browserify': function (key, salt, iterations, length) {
+     var crypto = require('crypto-browserify')
+    return function (key, salt, iterations, length) {
+      return crypto.pbkdf2Sync(key, salt, iterations, length).toString('hex')
+    }
   },
   node : function (alg) {
+    var crypto = require('crypto')
     return function (key, salt, iterations, length) {
-      return require('crypto').pbkdf2Sync(key, salt, iterations, length).toString('hex')
+      return crypto.pbkdf2Sync(key, salt, iterations, length).toString('hex')
     }
   },
 
@@ -60,5 +64,5 @@ for(var i = 0; i <= 80; i++) {
 
   //if the first argument is a string,
   //console.log doesn't quote things
-  console.log(''+i, n, j, time, (n*j)/time, _hash)
+  console.log(''+i, n, j, time/j, (n*j)/time, _hash)
 }
