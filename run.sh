@@ -50,22 +50,22 @@ graphs () {
 
   # key derivation
 
-  $table output/pbkdf2/*-sha1.csv -c 0,1 \
-  | line-graph --width 900 --height 600 --title 'pbkdf2(sha1) increasing iterations' \
+  $table output/pbkdf2/*-sha1.csv -c 0,2 \
+  | line-graph --width 900 --height 600 --title 'pbkdf2(sha1) iterations per millisecond' \
   > graphs/pbkdf2-ops-sha1.png
 
-  $table output/pbkdf2/*-sha256.csv -c 0,1 \
-  | line-graph --width 900 --height 600 --title 'pbkdf2(sha256) increasing iterations' \
+  $table output/pbkdf2/*-sha256.csv -c 0,2 \
+  | line-graph --width 900 --height 600 --title 'pbkdf2(sha256) iterations per millisecond' \
   > graphs/pbkdf2-ops-sha256.png
 
   # key derivation, iterations / ms
 
-  $table output/pbkdf2/*-sha1.csv -c 0,2 \
-  | line-graph --width 900 --height 600 --title 'pbkdf2(sha1) iterations per millisecond' \
+  $table output/pbkdf2/*-sha1.csv -c 0,1 \
+  | line-graph --width 900 --height 600 --title 'pbkdf2(sha1) increasing iterations' \
   > graphs/pbkdf2-sha1.png
 
-  $table output/pbkdf2/*-sha256.csv -c 0,2 \
-  | line-graph --width 900 --height 600 --title 'pbkdf2(sha256) iterations per millisecond' \
+  $table output/pbkdf2/*-sha256.csv -c 0,1 \
+  | line-graph --width 900 --height 600 --title 'pbkdf2(sha256) increasing iterations' \
   > graphs/pbkdf2-sha256.png
 }
 
