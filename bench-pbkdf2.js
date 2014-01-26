@@ -48,6 +48,9 @@ var libs = {
 
 var M = 10*1000
 var prev = 0
+
+console.log('iterations (N), time (ms), iterations/ms (ops/ms), hash')
+
 var pbk = libs[lib](alg)
 
 for(var i = 0; i <= 80; i++) {
@@ -64,5 +67,5 @@ for(var i = 0; i <= 80; i++) {
 
   //if the first argument is a string,
   //console.log doesn't quote things
-  console.log(''+i, n, j, time/j, (n*j)/time, _hash)
+  console.log([''+n, time/j, (n*j)/time, _hash].join(', '))
 }

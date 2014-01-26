@@ -47,6 +47,7 @@ var prev = 0
 var hash = libs[lib](alg)
 
 //for(var i = 79; i <= 80; i++) {
+  console.log('run (N), input-size (bytes), ops (bytes/ms), time (ms)')
 var i = 1
 ;(function loop () {
   if(i > 80) return
@@ -62,7 +63,7 @@ var i = 1
   } while(end - start < 100)
   var time = end - start
 
-  console.log(''+i, n, _data.length, j, time, (_data.length*j)/time, _hash)
+  console.log([''+i, _data.length, (_data.length*j)/time, time/j].join(', '))
   i++
   setTimeout(loop, 10)
 })()
