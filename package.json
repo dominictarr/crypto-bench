@@ -15,7 +15,8 @@
   },
   "devDependencies": {
     "himark": "~1.0.4",
-    "carpenter": "~0.1.2"
+    "carpenter": "~0.1.2",
+    "dat-table": "~0.3.0"
   },
   "scripts": {
     "test": "set -e; for t in test/*.js; do node $t; done",
