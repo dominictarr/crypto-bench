@@ -1,12 +1,15 @@
-# performance of various javascript crypto implementations
+# performance of hashing in various javascript crypto libraries.
 
-Dominic Tarr (Stackvm) 2014-01-26
+Dominic Tarr (Stackvm Research) 2014-01-26
 
 ## Abstract
 
-Javascript is already used for nearly everything, so it's inivitable that it must be used for cryptography also.
-There are a few javascript crypto implementations available, which are of varying quality, as the following will demonstrate.
-
+The performance of a cryptography library is not it's most important aspect
+(security/correctness is), but performance is still highly important.
+If performance is too low, it affects the usability, and so less cryptography
+will be used. In this article, I've compared the performance of the sha hashing functions
+in several popular javascript crypto libs. These have widly varying perfomance,
+and some have non-linear performance characteristics.
 
 ## Method
 
@@ -61,6 +64,12 @@ TypedArrays is what slows down crypto-browserify at low input size.
 A future experiment will be to manage TypedArrays with pooling or some such,
 to make repeated hashes faster.
 
+It is temping to think of the change in performance as an good thing,
+but I think it's better to interpret any departure from linear as
+signs of trouble - or at least room for improvement. Although I am very happy
+to see that my library is significantly faster than the others at one thing.
+Hashing small inputs is very important, since most inputs are probably small.
+
 ### sha256, time taken against input size.
 
 ![sha256 hashing a 0-10MB file](./graphs/hash-sha256.png)
@@ -86,7 +95,7 @@ binary representations. crypto-browserify uses node.js buffers
 a polyfill ontop of TypedArrays in the browser) where as uses _binary strings_.
 Binary Strings is not expected to be faster than TypedArrays, but may have some benefits
 in copying from one string to another, since strings are immutable, and there is
-the possibility that v8 is doing something clevel here.
+the possibility that v8 is doing something clever here.
 
 ## key derivation (pbkdf2)
 
@@ -109,11 +118,12 @@ compared to crypto-js, the other libraries are not even on this scale.
 looking at the iterations per ms, we see that sjcl, which was the slowest on large files,
 is the fastest with rapid iterations. This suggests that there is something about the
 crypto-browserify and forge implementations which make the hash objects heavy to create,
-but efficient once created. If this is correct, they could possibly be improved with pooling.
+but efficient once created. If this is correct, they could possibly be improved with pooling,
+or some other thing to lighten iterations.
 
 ### pbkdf2(sha256), time taken against iterations.
 
-![pbkdf2(sha256) 1 - 10k iterations](./graph/hash-sha256.png)
+![pbkdf2(sha256) 1 - 10k iterations](./graphs/hash-sha256.png)
 
 >(y-axis shows total time taken, higher is better)
 
@@ -121,13 +131,34 @@ Again, crytpo-js has non-linear scaling.
 
 ### sha256 pbkdf, iterations per millisecond.
 
-![pbkdf2(sha256) 1 - 10k iterations](./graph/hash-ops-sha256.png)
+![pbkdf2(sha256) 1 - 10k iterations](./graphs/hash-ops-sha256.png)
 
 >(y-axis shows time/input size, lower is better)
 
-interestingly, the relative performance of sjcl is even more impressive,
+Interestingly, the relative performance of sjcl is even more impressive,
 about 4 times greater than sha1 (it's not surprising that sha256 is the default
 hash algorithim for sjcl)
+
+## hashing small files (zoomed into bottom left of hashing bytes/ms graphs)
+
+Is sjcl's superiour pbkdf2 performance due to better performance at small values?
+If so, we would expect to see the lines cross if we zoomed in on the bottom left corner
+of the hash-ops-sha1 and hash-ops-sha256 graphs.
+
+### sha1 on small inputs
+
+![sha1 hashing a small input](./graphs/small-hash-sha1.png)
+
+>(y-axis shows time/input size, lower is better)
+
+### sha256 on small inputs
+
+![sha256 hashing a small input](./graphs/small-hash-sha256.png)
+
+>(y-axis shows time/input size, lower is better)
+
+sjcl is _not_ faster at pure hashes in small values, theirfore,
+the key to it's performance must be in another aspect of the implementation.
 
 ## Future Work
 
