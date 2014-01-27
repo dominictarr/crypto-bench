@@ -1,19 +1,25 @@
 <!doctype html>
 <html>
   <head>
+    <link rel="stylesheet" href="static/serif/style.css" />
     <style>#content {
   width: 900px;
   margin: auto;
+  font-family: Computer Modern Serif;
+
 }
 </style>
   </head>
   <body>
     <div id=content>
-    <h1 id="performance-of-various-javascript-crypto-implementations">performance of various javascript crypto implementations</h1>
-<p>Dominic Tarr (Stackvm) 2014-01-26</p>
+    <h1 id="performance-of-hashing-in-javascript-crypto-libraries-">performance of hashing in javascript crypto libraries.</h1>
+<p>Dominic Tarr (Stackvm Research) 2014-01-26</p>
 <h2 id="abstract">Abstract</h2>
-<p>Javascript is already used for nearly everything, so it&#39;s inivitable that it must be used for cryptography also.
-There are a few javascript crypto implementations available, which are of varying quality, as the following will demonstrate.</p>
+<p>The performance of a cryptography library is not it&#39;s most important consideration,
+but performance is still highly important. If performance is too low, it affects the usability,
+and so less cryptography will be used. In this article, I&#39;ve compared the performance of the 
+sha hashing functions in several javascript crypto libs. These have widly varying perfomance,
+and some have non-linear performance characteristics.</p>
 <h2 id="method">Method</h2>
 <p>So far, I have benchmarks for measuring hashing performance against input size,
 and key deriviation performance (pbkdf2) as the number of iterations are increased.
@@ -56,6 +62,11 @@ performance becomes readdily apparent. My suspucion is that the over head of all
 TypedArrays is what slows down crypto-browserify at low input size.
 A future experiment will be to manage TypedArrays with pooling or some such,
 to make repeated hashes faster.</p>
+<p>It is temping to think of the change in performance as an good thing,
+but I think it&#39;s better to interpret any departure from linear as
+signs of trouble - or at least room for improvement. Although I am very happy
+to see that my library is significantly faster than the others at one thing.
+Hashing small inputs is very important, since most inputs are probably small.</p>
 <h3 id="sha256-time-taken-against-input-size-">sha256, time taken against input size.</h3>
 <p><img src="./graphs/hash-sha256.png" alt="sha256 hashing a 0-10MB file"></p>
 <blockquote>
@@ -77,7 +88,7 @@ binary representations. crypto-browserify uses node.js buffers
 a polyfill ontop of TypedArrays in the browser) where as uses <em>binary strings</em>.
 Binary Strings is not expected to be faster than TypedArrays, but may have some benefits
 in copying from one string to another, since strings are immutable, and there is
-the possibility that v8 is doing something clevel here.</p>
+the possibility that v8 is doing something clever here.</p>
 <h2 id="key-derivation-pbkdf2-">key derivation (pbkdf2)</h2>
 <h3 id="pbkdf2-sha1-time-taken-against-iterations-">pbkdf2(sha1), time taken against iterations.</h3>
 <p><img src="./graphs/hash-sha1.png" alt="pbkdf2(sha1) 1 - 10k iterations"></p>
@@ -95,7 +106,8 @@ compared to crypto-js, the other libraries are not even on this scale.</p>
 <p>looking at the iterations per ms, we see that sjcl, which was the slowest on large files,
 is the fastest with rapid iterations. This suggests that there is something about the
 crypto-browserify and forge implementations which make the hash objects heavy to create,
-but efficient once created. If this is correct, they could possibly be improved with pooling.</p>
+but efficient once created. If this is correct, they could possibly be improved with pooling,
+or some other thing to lighten iterations.</p>
 <h3 id="pbkdf2-sha256-time-taken-against-iterations-">pbkdf2(sha256), time taken against iterations.</h3>
 <p><img src="./graphs/hash-sha256.png" alt="pbkdf2(sha256) 1 - 10k iterations"></p>
 <blockquote>
