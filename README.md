@@ -5,7 +5,7 @@ benchmark the various js crypto libraries
 ## results
 
 results are discussed here: [markdown format](./results.md)
-and [typeset for maximum credibitily](./index.html)
+and [typeset for maximum credibitily](http://dominictarr.github.io/crypto-bench)
 
 ## libraries
 
