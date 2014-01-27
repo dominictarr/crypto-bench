@@ -1,6 +1,6 @@
 # performance of hashing in javascript crypto libraries.
 
-Dominic Tarr (Stackvm Research) 2014-01-26
+Dominic Tarr (Stackvm Mad Science University) 2014-01-26
 
 ## Abstract
 
@@ -100,7 +100,7 @@ the possibility that v8 is doing something clever here.
 
 ### pbkdf2(sha1), time taken against iterations.
 
-![pbkdf2(sha1) 1 - 10k iterations](./graphs/hash-sha1.png)
+![pbkdf2(sha1) 1 - 10k iterations](./graphs/pbkdf2-sha1.png)
 
 >(y-axis shows total time taken, higher is better)
 
@@ -110,7 +110,7 @@ compared to crypto-js, the other libraries are not even on this scale.
 
 ### sha1 pbkdf, iterations per millisecond.
 
-![pbkdf2(sha1) 1 - 10k iterations](./graphs/hash-ops-sha1.png)
+![pbkdf2(sha1) 1 - 10k iterations](./graphs/pbkdf2-ops-sha1.png)
 
 >(y-axis shows time/input size, lower is better)
 
@@ -122,7 +122,7 @@ or some other thing to lighten iterations.
 
 ### pbkdf2(sha256), time taken against iterations.
 
-![pbkdf2(sha256) 1 - 10k iterations](./graphs/hash-sha256.png)
+![pbkdf2(sha256) 1 - 10k iterations](./graphs/pbkdf2-sha256.png)
 
 >(y-axis shows total time taken, higher is better)
 
@@ -130,7 +130,7 @@ Again, crypto-js has non-linear scaling.
 
 ### sha256 pbkdf, iterations per millisecond.
 
-![pbkdf2(sha256) 1 - 10k iterations](./graphs/hash-ops-sha256.png)
+![pbkdf2(sha256) 1 - 10k iterations](./graphs/pbkdf2-ops-sha256.png)
 
 >(y-axis shows time/input size, lower is better)
 
