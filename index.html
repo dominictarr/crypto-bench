@@ -2,13 +2,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="static/serif/style.css" />
-    <style>#content {
-  width: 900px;
-  margin: auto;
-  font-family: Computer Modern Serif;
-
-}
-</style>
+    <link rel="stylesheet" href="static/style.css" />
   </head>
   <body>
     <div id=content>
@@ -91,7 +85,7 @@ in copying from one string to another, since strings are immutable, and there is
 the possibility that v8 is doing something clever here.</p>
 <h2 id="key-derivation-pbkdf2-">key derivation (pbkdf2)</h2>
 <h3 id="pbkdf2-sha1-time-taken-against-iterations-">pbkdf2(sha1), time taken against iterations.</h3>
-<p><img src="./graphs/hash-sha1.png" alt="pbkdf2(sha1) 1 - 10k iterations"></p>
+<p><img src="./graphs/pbkdf2-sha1.png" alt="pbkdf2(sha1) 1 - 10k iterations"></p>
 <blockquote>
 <p>(y-axis shows total time taken, higher is better)</p>
 </blockquote>
@@ -99,7 +93,7 @@ the possibility that v8 is doing something clever here.</p>
 something is clearly wrong, as there is no reason this should not be linear.
 compared to crypto-js, the other libraries are not even on this scale.</p>
 <h3 id="sha1-pbkdf-iterations-per-millisecond-">sha1 pbkdf, iterations per millisecond.</h3>
-<p><img src="./graphs/hash-ops-sha1.png" alt="pbkdf2(sha1) 1 - 10k iterations"></p>
+<p><img src="./graphs/pbkdf2-ops-sha1.png" alt="pbkdf2(sha1) 1 - 10k iterations"></p>
 <blockquote>
 <p>(y-axis shows time/input size, lower is better)</p>
 </blockquote>
@@ -109,13 +103,13 @@ crypto-browserify and forge implementations which make the hash objects heavy to
 but efficient once created. If this is correct, they could possibly be improved with pooling,
 or some other thing to lighten iterations.</p>
 <h3 id="pbkdf2-sha256-time-taken-against-iterations-">pbkdf2(sha256), time taken against iterations.</h3>
-<p><img src="./graphs/hash-sha256.png" alt="pbkdf2(sha256) 1 - 10k iterations"></p>
+<p><img src="./graphs/pbkdf2-sha256.png" alt="pbkdf2(sha256) 1 - 10k iterations"></p>
 <blockquote>
 <p>(y-axis shows total time taken, higher is better)</p>
 </blockquote>
 <p>Again, crypto-js has non-linear scaling.</p>
 <h3 id="sha256-pbkdf-iterations-per-millisecond-">sha256 pbkdf, iterations per millisecond.</h3>
-<p><img src="./graphs/hash-ops-sha256.png" alt="pbkdf2(sha256) 1 - 10k iterations"></p>
+<p><img src="./graphs/pbkdf2-ops-sha256.png" alt="pbkdf2(sha256) 1 - 10k iterations"></p>
 <blockquote>
 <p>(y-axis shows time/input size, lower is better)</p>
 </blockquote>
