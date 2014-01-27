@@ -44,7 +44,7 @@ than a small effect on hashing performance.
 
 ![sha1 hashing a 0-10MB file](./graphs/hash-sha1.png)
 
->(y-axis shows total time taken, higher is better)
+>(y-axis shows total time taken, lower is better)
 
 Every implementation behaves basically linearly with input size,
 except that crypto-browserify becomes more efficient once input size
@@ -55,7 +55,7 @@ and sjcl and crypto-js are significantly slower as file size increases.
 
 ![sha1 hashing a 0-10MB file](./graphs/hash-ops-sha1.png)
 
->(y-axis shows time/input size, lower is better)
+>(y-axis shows time/input size, higher is better)
 
 When comparing the rate of hashing against input size, the improvement in crypto-browserify's
 performance becomes readily apparent. My suspicion is that the over head of allocating
@@ -73,7 +73,7 @@ Hashing small inputs is very important, since most inputs are probably small.
 
 ![sha256 hashing a 0-10MB file](./graphs/hash-sha256.png)
 
->(y-axis shows total time taken, higher is better)
+>(y-axis shows total time taken, lower is better)
 
 sjcl and crypto-js performance at sha256 seems much the same as for sha1,
 but forge is faster than crypto-browserify, which doesn't show any improvement with input size.
@@ -82,7 +82,7 @@ but forge is faster than crypto-browserify, which doesn't show any improvement w
 
 ![sha256 hashing a 0-10MB file](./graphs/hash-ops-sha256.png)
 
->(y-axis shows time/input size, lower is better)
+>(y-axis shows time/input size, higher is better)
 
 forge is clearly faster, and crypto-browserify does not show any improvement.
 also note that the performance of both forge and crypto-browserify is over 20k bytes per ms,
@@ -102,7 +102,7 @@ the possibility that v8 is doing something clever here.
 
 ![pbkdf2(sha1) 1 - 10k iterations](./graphs/pbkdf2-sha1.png)
 
->(y-axis shows total time taken, higher is better)
+>(y-axis shows total time taken, lower is better)
 
 This graph shows that crypto-js's pbkdf2 has non-linear performance.
 something is clearly wrong, as there is no reason this should not be linear.
@@ -124,7 +124,7 @@ or some other thing to lighten iterations.
 
 ![pbkdf2(sha256) 1 - 10k iterations](./graphs/pbkdf2-sha256.png)
 
->(y-axis shows total time taken, higher is better)
+>(y-axis shows total time taken, lower is better)
 
 Again, crypto-js has non-linear scaling.
 
@@ -132,7 +132,7 @@ Again, crypto-js has non-linear scaling.
 
 ![pbkdf2(sha256) 1 - 10k iterations](./graphs/pbkdf2-ops-sha256.png)
 
->(y-axis shows time/input size, lower is better)
+>(y-axis shows time/input size, higher is better)
 
 Interestingly, the relative performance of sjcl is even more impressive,
 about 4 times greater than sha1 (it's not surprising that sha256 is the default
