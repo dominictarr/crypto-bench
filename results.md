@@ -1,4 +1,4 @@
-# performance of hashing in javascript crypto libraries.
+# Performance of Hashing in Javascript Crypto Libraries.
 
 Dominic Tarr (Stackvm Mad Science University) 2014-01-26
 
@@ -23,7 +23,7 @@ to `time_taken/repeated_runs`.
 
 All benchmarks where run on a macbook air 11 running archlinux and node@0.10.24
 
-## crypto implementations
+## Crypto libraries tested
 
 * Stanford javascript crypto library (sjcl)
 * crypto-js
@@ -40,7 +40,7 @@ This is not necessarily fair on some libraries,
 but it would be surprising if encoding had more
 than a small effect on hashing performance.
 
-### sha1, time taken against input size.
+### Sha1, time taken against input size.
 
 ![sha1 hashing a 0-10MB file](./graphs/hash-sha1.png)
 
@@ -51,7 +51,7 @@ except that crypto-browserify becomes more efficient once input size
 becomes about 2MB. Below 2MB, forge is slightly ahead of crypto-browserify,
 and sjcl and crypto-js are significantly slower as file size increases.
 
-### sha1, bytes hashed per millisecond
+### Sha1, bytes hashed per millisecond
 
 ![sha1 hashing a 0-10MB file](./graphs/hash-ops-sha1.png)
 
@@ -69,7 +69,7 @@ signs of trouble - or at least room for improvement. Although I am very happy
 to see that my library is significantly faster than the others at one thing.
 Hashing small inputs is very important, since most inputs are probably small.
 
-### sha256, time taken against input size.
+### Sha256, time taken against input size.
 
 ![sha256 hashing a 0-10MB file](./graphs/hash-sha256.png)
 
@@ -91,14 +91,14 @@ about the performance of crypto-browserify's sha1.
 An interesting thing here is that crypto-browserify and forge both use very different
 binary representations. crypto-browserify uses node.js buffers
 (or  [feross/native-buffer-browserify](https://github.com/feross/native-buffer-browserify),
-a polyfill on top of TypedArrays in the browser) where as uses _binary strings_.
+a polyfill on top of TypedArrays in the browser) where as forge uses _binary strings_.
 Binary Strings is not expected to be faster than TypedArrays, but may have some benefits
 in copying from one string to another, since strings are immutable, and there is
 the possibility that v8 is doing something clever here.
 
-## key derivation (pbkdf2)
+## Key Derivation (pbkdf2)
 
-### pbkdf2(sha1), time taken against iterations.
+### Pbkdf2(sha1), time taken against iterations.
 
 ![pbkdf2(sha1) 1 - 10k iterations](./graphs/pbkdf2-sha1.png)
 
@@ -108,7 +108,7 @@ This graph shows that crypto-js's pbkdf2 has non-linear performance.
 something is clearly wrong, as there is no reason this should not be linear.
 compared to crypto-js, the other libraries are not even on this scale.
 
-### sha1 pbkdf, iterations per millisecond.
+### Pbkdf(sha1), iterations per millisecond.
 
 ![pbkdf2(sha1) 1 - 10k iterations](./graphs/pbkdf2-ops-sha1.png)
 
@@ -120,7 +120,7 @@ crypto-browserify and forge implementations which make the hash objects heavy to
 but efficient once created. If this is correct, they could possibly be improved with pooling,
 or some other thing to lighten iterations.
 
-### pbkdf2(sha256), time taken against iterations.
+### Pbkdf2(sha256), time taken against iterations.
 
 ![pbkdf2(sha256) 1 - 10k iterations](./graphs/pbkdf2-sha256.png)
 
@@ -128,7 +128,7 @@ or some other thing to lighten iterations.
 
 Again, crypto-js has non-linear scaling.
 
-### sha256 pbkdf, iterations per millisecond.
+### Pbkdf2(sha256), iterations per millisecond.
 
 ![pbkdf2(sha256) 1 - 10k iterations](./graphs/pbkdf2-ops-sha256.png)
 
@@ -138,19 +138,21 @@ Interestingly, the relative performance of sjcl is even more impressive,
 about 4 times greater than sha1 (it's not surprising that sha256 is the default
 hash algorithm for sjcl)
 
-## hashing small files (zoomed into bottom left of hashing bytes/ms graphs)
+## Hashing small files
+
+> (zoomed into bottom left of the earlier hashing bytes/ms graphs)
 
 Is sjcl's superior pbkdf2 performance due to better performance at small values?
 If so, we would expect to see the lines cross if we zoomed in on the bottom left corner
 of the hash-ops-sha1 and hash-ops-sha256 graphs.
 
-### sha1 on small inputs
+### Sha1 on small inputs
 
 ![sha1 hashing a small input](./graphs/small-hash-sha1.png)
 
 >(y-axis shows time/input size, lower is better)
 
-### sha256 on small inputs
+### Sha256 on small inputs
 
 ![sha256 hashing a small input](./graphs/small-hash-sha256.png)
 
