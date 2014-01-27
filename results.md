@@ -146,17 +146,17 @@ Is sjcl's superior pbkdf2 performance due to better performance at small values?
 If so, we would expect to see the lines cross if we zoomed in on the bottom left corner
 of the hash-ops-sha1 and hash-ops-sha256 graphs.
 
-### Sha1 on small inputs
+### Sha1 on small inputs (bytes/ms)
 
 ![sha1 hashing a small input](./graphs/small-hash-sha1.png)
 
->(y-axis shows time/input size, lower is better)
+>(y-axis shows time/input size, higher is better)
 
-### Sha256 on small inputs
+### Sha256 on small inputs (bytes/ms)
 
 ![sha256 hashing a small input](./graphs/small-hash-sha256.png)
 
->(y-axis shows time/input size, lower is better)
+>(y-axis shows time/input size, higher is better)
 
 sjcl is _not_ faster at pure hashes in small values, therefore,
 the key to it's performance must be in another aspect of the implementation.
