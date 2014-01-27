@@ -112,7 +112,7 @@ compared to crypto-js, the other libraries are not even on this scale.
 
 ![pbkdf2(sha1) 1 - 10k iterations](./graphs/pbkdf2-ops-sha1.png)
 
->(y-axis shows time/input size, lower is better)
+>(y-axis shows time/input size, higher is better)
 
 looking at the iterations per ms, we see that sjcl, which was the slowest on large files,
 is the fastest with rapid iterations. This suggests that there is something about the
