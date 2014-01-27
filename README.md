@@ -1,20 +1,27 @@
 # crypto-bench
 
-benchmark the various js crypto libs
+benchmark the various js crypto libraries
+
+## results
+
+results are discussed here: [markdown format](./results.md)
+and [typeset for maximum credibitily](./index.html)
 
 ## libraries
 
-* node.js (openssl binding)
 * sjcl
 * crypto-js
 * forge
 * sha.js (part of crypto-browserify)
 
+node.js is disabled, because it's so much faster (20x)
+that is obscures the results of the js libraries.
+
 ## benchmarks
 
 ### hash
 
-Hash random data from 20 bytes - 10 mb.
+Hash random data from 20 bytes - 10 MB.
 This tests the libraries ability to hash lots of data.
 
 ``` js
@@ -34,10 +41,18 @@ as thousand of hashes are created, but they each hash a small amount of data.
 node bench-pkbdf2.js [node|crypto-js|forge|sha.js] [sha1|sha256]
 ```
 
-## results
+## run all benchmarks
 
-please run them yourself, there is a bit more work to do
-here to display results in a useful way.
+```
+./run.sh all hash
+./run.sh all pbkdf2
+
+# regenerate graphs
+./runs.sh graphs
+
+# regenerate article
+npm run build
+```
 
 ## License
 
