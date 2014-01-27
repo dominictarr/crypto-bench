@@ -55,7 +55,7 @@ and sjcl and crypto-js are significantly slower as file size increases.
 
 ![sha1 hashing a 0-10MB file](./graphs/hash-ops-sha1.png)
 
->(y-axis shows time/input size, higher is better)
+>(y-axis shows size/time, higher is better)
 
 When comparing the rate of hashing against input size, the improvement in crypto-browserify's
 performance becomes readily apparent. My suspicion is that the over head of allocating
@@ -82,7 +82,7 @@ but forge is faster than crypto-browserify, which doesn't show any improvement w
 
 ![sha256 hashing a 0-10MB file](./graphs/hash-ops-sha256.png)
 
->(y-axis shows time/input size, higher is better)
+>(y-axis shows size/time, higher is better)
 
 forge is clearly faster, and crypto-browserify does not show any improvement.
 also note that the performance of both forge and crypto-browserify is over 20k bytes per ms,
@@ -112,7 +112,7 @@ compared to crypto-js, the other libraries are not even on this scale.
 
 ![pbkdf2(sha1) 1 - 10k iterations](./graphs/pbkdf2-ops-sha1.png)
 
->(y-axis shows time/input size, higher is better)
+>(y-axis shows size/time, higher is better)
 
 looking at the iterations per ms, we see that sjcl, which was the slowest on large files,
 is the fastest with rapid iterations. This suggests that there is something about the
@@ -132,7 +132,7 @@ Again, crypto-js has non-linear scaling.
 
 ![pbkdf2(sha256) 1 - 10k iterations](./graphs/pbkdf2-ops-sha256.png)
 
->(y-axis shows time/input size, higher is better)
+>(y-axis shows size/time, higher is better)
 
 Interestingly, the relative performance of sjcl is even more impressive,
 about 4 times greater than sha1 (it's not surprising that sha256 is the default
@@ -150,13 +150,13 @@ of the hash-ops-sha1 and hash-ops-sha256 graphs.
 
 ![sha1 hashing a small input](./graphs/small-hash-sha1.png)
 
->(y-axis shows time/input size, higher is better)
+>(y-axis shows size/time, higher is better)
 
 ### Sha256 on small inputs (bytes/ms)
 
 ![sha256 hashing a small input](./graphs/small-hash-sha256.png)
 
->(y-axis shows time/input size, higher is better)
+>(y-axis shows size/time, higher is better)
 
 sjcl is _not_ faster at pure hashes in small values, therefore,
 the key to it's performance must be in another aspect of the implementation.
