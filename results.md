@@ -172,3 +172,7 @@ It will also be worthwhile running the benchmarks under different javascript eng
 the hash algorithms in sjcl, crypto-browserify, and forge, have been optimized for different purposes.
 It appears that crypto-js hasn't been optimized, after the correctness of the implementation has been verified.
 
+## Resources
+
+All resources required to repeat these experiments are available at
+[https://github.com/dominictarr/crypto-bench](https://github.com/dominictarr/crypto-bench)
