@@ -1,6 +1,6 @@
 # Performance of Hashing in Javascript Crypto Libraries.
 
-Dominic Tarr (Stackvm Mad Science University) 2014-04-04 (v1.1.1)
+Dominic Tarr (Stackvm Mad Science University) 2014-04-05 (v1.1.2)
 
 ## Abstract
 
