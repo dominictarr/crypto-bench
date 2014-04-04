@@ -25,18 +25,18 @@ All benchmarks where run on a macbook air 11 running archlinux and node@0.10.25
 
 ## Crypto Libraries Tested
 
-* Stanford javascript crypto library (sjcl)
-* crypto-js
-* forge
-* crypto-browserify (I am the author of this module)
+* Stanford javascript crypto library (`sjcl`)
+* `crypto-js`
+* `forge`
+* `crypto-browserify` (I am the author of this module)
 
 these libraries where also benchmarked,
 but they only implemented some of the features tested.
 
-* crypto-mx (sha256)
-* git-sha1 (sha1)
-* jshashes (sha1, sha256)
-* rusha (sha1)
+* `crypto-mx` (sha256)
+* `git-sha1` (sha1)
+* `jshashes` (sha1, sha256)
+* `rusha` (sha1)
 
 ## Hashing a 0-10MB File
 
@@ -102,14 +102,14 @@ but forge is faster than crypto-browserify, which doesn't show any improvement w
 
 >(y-axis shows size/time, higher is better)
 
-forge is clearly faster, and crypto-browserify does not show any improvement.
-also note that the performance of both forge and crypto-browserify is over 20k bytes per ms,
-about the performance of crypto-browserify's sha1.
+`forge` is clearly faster, and `crypto-browserify` does not show any improvement.
+also note that the performance of both `forge` and `crypto-browserify` is over 20k bytes per ms,
+about the performance of `crypto-browserify`'s sha1.
 
-An interesting thing here is that crypto-browserify and forge both use very different
-binary representations. crypto-browserify uses node.js buffers
+An interesting thing here is that `crypto-browserify` and `forge` both use very different
+binary representations. `crypto-browserify` uses node.js buffers
 (or  [feross/buffer](https://github.com/feross/buffer),
-a polyfill on top of TypedArrays in the browser) where as forge uses _binary strings_.
+a polyfill on top of TypedArrays in the browser) where as `forge` uses _binary strings_.
 Binary Strings is not expected to be faster than TypedArrays, but may have some benefits
 in copying from one string to another, since strings are immutable, and there is
 the possibility that v8 is doing something clever here.
@@ -122,9 +122,9 @@ the possibility that v8 is doing something clever here.
 
 >(y-axis shows total time taken, lower is better)
 
-This graph shows that crypto-js's pbkdf2 has non-linear performance.
+This graph shows that `crypto-js`'s `pbkdf2` has non-linear performance.
 something is clearly wrong, as there is no reason this should not be linear.
-compared to crypto-js, the other libraries are not even on this scale.
+compared to `crypto-js`, the other libraries are not even on this scale.
 
 ### Pbkdf(sha1), Iterations per Millisecond.
 
@@ -132,9 +132,9 @@ compared to crypto-js, the other libraries are not even on this scale.
 
 >(y-axis shows size/time, higher is better)
 
-looking at the iterations per ms, we see that sjcl, which was the slowest on large files,
+looking at the iterations per ms, we see that `sjcl`, which was the slowest on large files,
 is the fastest with rapid iterations. This suggests that there is something about the
-crypto-browserify and forge implementations which make the hash objects heavy to create,
+`crypto-browserify` and `forge` implementations which make the hash objects heavy to create,
 but efficient once created. If this is correct, they could possibly be improved with pooling,
 or some other thing to lighten iterations.
 
@@ -163,9 +163,9 @@ hash algorithm for sjcl)
 
 > (zoomed into bottom left of the earlier hashing bytes/ms graphs)
 
-Is sjcl's superior pbkdf2 performance due to better performance at small values?
+Is `sjcl`'s superior pbkdf2 performance due to better performance at small values?
 If so, we would expect to see the lines cross if we zoomed in on the bottom left corner
-of the hash-ops-sha1 and hash-ops-sha256 graphs.
+of the bytes-hashed-per-millisecond graphs.
 
 ### Sha1 on Small Inputs (bytes/ms)
 
@@ -179,7 +179,7 @@ of the hash-ops-sha1 and hash-ops-sha256 graphs.
 
 >(y-axis shows size/time, higher is better)
 
-sjcl is _not_ faster at pure hashes in small values, therefore,
+`sjcl` is _not_ faster at pure hashes in small values, therefore,
 the key to it's performance must be in another aspect of the implementation.
 
 ## Comparison of Fastest Hashes.
