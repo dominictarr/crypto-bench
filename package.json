@@ -11,16 +11,26 @@
     "crypto-js": "~3.1.2-2",
     "node-forge": "~0.2.23",
     "sjcl": "https://github.com/dominictarr/sjcl/archive/built.tar.gz",
-    "crypto-browserify": "~2.1.0"
+    "crypto-browserify": "~2.1.0",
+    "blake2s": "~1.0.0",
+    "ripemd160": "~0.1.0",
+    "jshashes": "~1.0.4",
+    "cryptomx": "~1.0.1",
+    "rusha": "~0.7.2",
+    "js-nacl": "~0.5.0",
+    "git-sha1": "~0.1.0"
   },
   "devDependencies": {
     "himark": "~1.0.4",
     "carpenter": "~0.1.2",
-    "dat-table": "~0.3.0"
+    "dat-table": "~0.3.1",
+    "replace-stream": "~0.0.1",
+    "line-graph": "~1.0.5"
   },
   "scripts": {
     "test": "set -e; for t in test/*.js; do node $t; done",
-    "build": "carpenter static/layout.html > index.html"
+    "build": "carpenter static/layout.html > index.html",
+    "start": "./run.sh all; ./run.sh graphs"
   },
   "author": "Dominic Tarr <dominic.tarr@gmail.com> (dominictarr.com)",
   "license": "MIT"
