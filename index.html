@@ -7,7 +7,7 @@
   <body>
     <div id=content>
     <h1 id="performance-of-hashing-in-javascript-crypto-libraries-">Performance of Hashing in Javascript Crypto Libraries.</h1>
-<p>Dominic Tarr (Stackvm Mad Science University) 2014-01-26 (v1.0.4)</p>
+<p>Dominic Tarr (Stackvm Mad Science University) 2014-04-04 (v0.1.0)</p>
 <h2 id="abstract">Abstract</h2>
 <p>The performance of a cryptography library is not it&#39;s most important consideration,
 but performance is still highly important. If performance is too low, it affects the usability,
@@ -25,18 +25,18 @@ to <code>time_taken/repeated_runs</code>.</p>
 <p>All benchmarks where run on a macbook air 11 running archlinux and node@0.10.25</p>
 <h2 id="crypto-libraries-tested">Crypto Libraries Tested</h2>
 <ul>
-<li>Stanford javascript crypto library (sjcl)</li>
-<li>crypto-js</li>
-<li>forge</li>
-<li>crypto-browserify (I am the author of this module)</li>
+<li>Stanford javascript crypto library (<code>sjcl</code>)</li>
+<li><code>crypto-js</code></li>
+<li><code>forge</code></li>
+<li><code>crypto-browserify</code> (I am the author of this module)</li>
 </ul>
 <p>these libraries where also benchmarked,
 but they only implemented some of the features tested.</p>
 <ul>
-<li>crypto-mx (sha256)</li>
-<li>git-sha1 (sha1)</li>
-<li>jshashes (sha1, sha256)</li>
-<li>rusha (sha1)</li>
+<li><code>crypto-mx</code> (sha256)</li>
+<li><code>git-sha1</code> (sha1)</li>
+<li><code>jshashes</code> (sha1, sha256)</li>
+<li><code>rusha</code> (sha1)</li>
 </ul>
 <h2 id="hashing-a-0-10mb-file">Hashing a 0-10MB File</h2>
 <p>Since each library provides a different API, each api has been wrapped to a function
@@ -89,13 +89,13 @@ but forge is faster than crypto-browserify, which doesn&#39;t show any improveme
 <blockquote>
 <p>(y-axis shows size/time, higher is better)</p>
 </blockquote>
-<p>forge is clearly faster, and crypto-browserify does not show any improvement.
-also note that the performance of both forge and crypto-browserify is over 20k bytes per ms,
-about the performance of crypto-browserify&#39;s sha1.</p>
-<p>An interesting thing here is that crypto-browserify and forge both use very different
-binary representations. crypto-browserify uses node.js buffers
+<p><code>forge</code> is clearly faster, and <code>crypto-browserify</code> does not show any improvement.
+also note that the performance of both <code>forge</code> and <code>crypto-browserify</code> is over 20k bytes per ms,
+about the performance of <code>crypto-browserify</code>&#39;s sha1.</p>
+<p>An interesting thing here is that <code>crypto-browserify</code> and <code>forge</code> both use very different
+binary representations. <code>crypto-browserify</code> uses node.js buffers
 (or  <a href="https://github.com/feross/buffer">feross/buffer</a>,
-a polyfill on top of TypedArrays in the browser) where as forge uses <em>binary strings</em>.
+a polyfill on top of TypedArrays in the browser) where as <code>forge</code> uses <em>binary strings</em>.
 Binary Strings is not expected to be faster than TypedArrays, but may have some benefits
 in copying from one string to another, since strings are immutable, and there is
 the possibility that v8 is doing something clever here.</p>
@@ -105,17 +105,17 @@ the possibility that v8 is doing something clever here.</p>
 <blockquote>
 <p>(y-axis shows total time taken, lower is better)</p>
 </blockquote>
-<p>This graph shows that crypto-js&#39;s pbkdf2 has non-linear performance.
+<p>This graph shows that <code>crypto-js</code>&#39;s <code>pbkdf2</code> has non-linear performance.
 something is clearly wrong, as there is no reason this should not be linear.
-compared to crypto-js, the other libraries are not even on this scale.</p>
+compared to <code>crypto-js</code>, the other libraries are not even on this scale.</p>
 <h3 id="pbkdf-sha1-iterations-per-millisecond-">Pbkdf(sha1), Iterations per Millisecond.</h3>
 <p><img src="./graphs/pbkdf2-ops-sha1.png" alt="pbkdf2(sha1) 1 - 10k iterations"></p>
 <blockquote>
 <p>(y-axis shows size/time, higher is better)</p>
 </blockquote>
-<p>looking at the iterations per ms, we see that sjcl, which was the slowest on large files,
+<p>looking at the iterations per ms, we see that <code>sjcl</code>, which was the slowest on large files,
 is the fastest with rapid iterations. This suggests that there is something about the
-crypto-browserify and forge implementations which make the hash objects heavy to create,
+<code>crypto-browserify</code> and <code>forge</code> implementations which make the hash objects heavy to create,
 but efficient once created. If this is correct, they could possibly be improved with pooling,
 or some other thing to lighten iterations.</p>
 <p><code>rusha</code> unfortunately does not have a <code>pbkdf2</code> feature, this could easily be added,
@@ -138,9 +138,9 @@ hash algorithm for sjcl)</p>
 <blockquote>
 <p>(zoomed into bottom left of the earlier hashing bytes/ms graphs)</p>
 </blockquote>
-<p>Is sjcl&#39;s superior pbkdf2 performance due to better performance at small values?
+<p>Is <code>sjcl</code>&#39;s superior pbkdf2 performance due to better performance at small values?
 If so, we would expect to see the lines cross if we zoomed in on the bottom left corner
-of the hash-ops-sha1 and hash-ops-sha256 graphs.</p>
+of the bytes-hashed-per-millisecond graphs.</p>
 <h3 id="sha1-on-small-inputs-bytes-ms-">Sha1 on Small Inputs (bytes/ms)</h3>
 <p><img src="./graphs/small-hash-sha1.png" alt="sha1 hashing a small input"></p>
 <blockquote>
@@ -151,7 +151,7 @@ of the hash-ops-sha1 and hash-ops-sha256 graphs.</p>
 <blockquote>
 <p>(y-axis shows size/time, higher is better)</p>
 </blockquote>
-<p>sjcl is <em>not</em> faster at pure hashes in small values, therefore,
+<p><code>sjcl</code> is <em>not</em> faster at pure hashes in small values, therefore,
 the key to it&#39;s performance must be in another aspect of the implementation.</p>
 <h2 id="comparison-of-fastest-hashes-">Comparison of Fastest Hashes.</h2>
 <p>If you where implementing a new crypto system that must run in the browser,
