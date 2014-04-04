@@ -4,7 +4,7 @@ Dominic Tarr (Stackvm Mad Science University) 2014-04-04 (v1.1.1)
 
 ## Abstract
 
-The performance of a cryptography library is not it's most important consideration,
+The performance of a cryptography library is not its most important consideration,
 but performance is still highly important. If performance is too low, it affects the usability,
 and so less cryptography will be used. In this article, I've compared the performance of the 
 sha hashing functions in several javascript crypto libraries. These have wildly varying performance,
