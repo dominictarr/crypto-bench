@@ -1,7 +1,7 @@
 {
   "name": "crypto-bench",
   "description": "Performance of Hashing in Javascript Crypto Libraries",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "homepage": "https://github.com/dominictarr/crypto-bench",
   "repository": {
     "type": "git",
