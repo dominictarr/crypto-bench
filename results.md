@@ -30,7 +30,7 @@ All benchmarks where run on a macbook air 11 running archlinux and node@0.10.25
 * `forge`
 * `crypto-browserify` (I am the author of this module)
 
-these libraries where also benchmarked,
+The following libraries were also benchmarked,
 but they only implemented some of the features tested.
 
 * `crypto-mx` (sha256)
