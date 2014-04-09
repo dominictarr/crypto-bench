@@ -184,7 +184,7 @@ the key to it's performance must be in another aspect of the implementation.
 
 ## Comparison of Fastest Hashes.
 
-If you where implementing a new crypto system that must run in the browser,
+If you were implementing a new crypto system that must run in the browser,
 which is the most performant algorithim to use? In this experiment we compare
 the best implementations of different algorithms.
 
@@ -195,8 +195,8 @@ Weaknesses have been discovered in sha1, and it should not be used in a new syst
 
 >(y-axis size/time, higher is better)
 
-`blake2s` is a new algorithm designed specifically to be performant is
-the fastest implementation. `rusha` is close behind it, and forge's `sha256`
+`blake2s` is a new algorithm (designed specifically to be performant) is
+the fastest implementation. `rusha` is close behind it, and then forge's `sha256`
 All implementations display nearly completely linear performance.
 
 ## Future Work
