@@ -14,6 +14,12 @@ var libs = {
       return (new (sha[alg])()).update(data).digest('hex')
     }
   },
+  'hash.js': function (alg) {
+    var hash = require('hash.js')
+    return function (data) {
+      return (new (hash[alg])()).update(data).digest('hex')
+    }
+  },
 
   'crypto-browserify': function (alg) {
     var createHash = require('crypto-browserify').createHash
