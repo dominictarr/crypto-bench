@@ -20,7 +20,8 @@
     "ripemd160": "~0.1.0",
     "rusha": "~0.7.2",
     "sha.js": "^2.3.1",
-    "sjcl": "https://github.com/dominictarr/sjcl/archive/built.tar.gz"
+    "sjcl": "https://github.com/dominictarr/sjcl/archive/built.tar.gz",
+    "xorshift.js": "^1.0.1"
   },
   "devDependencies": {
     "carpenter": "~0.1.2",
