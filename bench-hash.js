@@ -1,10 +1,11 @@
 var lib = process.argv[2] || 'crypto-browserify'
 var alg = process.argv[3] || 'sha1'
-var randomData = require('crypto').pseudoRandomBytes
+var xorshift = require('xorshift.js')
 
 // generate 10 megs of random data
+var seed = process.env.SEED || xorshift.randomBytes(16).toString('hex')
 var M = 10 * 1000 * 1000
-var data = randomData(M)
+var data = new xorshift.XorShift128Plus(seed).randomBytes(M)
 
 var libs = {
   'sha.js': function (alg) {
