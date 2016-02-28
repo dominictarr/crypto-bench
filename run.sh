@@ -18,7 +18,8 @@ bench () {
 all () {
   # usage : all hash sha1
 
-  bench "$1" crypto-browserify "$2"
+  bench "$1" create-hash       "$2"
+  bench "$1" hash.js           "$2"
   bench "$1" sjcl              "$2"
   bench "$1" crypto-js         "$2"
   bench "$1" forge             "$2"

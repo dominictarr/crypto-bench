@@ -1,4 +1,4 @@
-var lib = process.argv[2] || 'crypto-browserify'
+var lib = process.argv[2] || 'create-hash'
 var alg = process.argv[3] || 'sha1'
 var xorshift = require('xorshift.js')
 
@@ -8,10 +8,10 @@ var M = 10 * 1000 * 1000
 var data = new xorshift.XorShift128Plus(seed).randomBytes(M)
 
 var libs = {
-  'sha.js': function (alg) {
-    var sha = require('sha.js')
+  'create-hash': function (alg) {
+    var createHash = require('create-hash/browser')
     return function (data) {
-      return (new (sha[alg])()).update(data).digest('hex')
+      return createHash(alg).update(data).digest('hex')
     }
   },
   'hash.js': function (alg) {
@@ -21,12 +21,6 @@ var libs = {
     }
   },
 
-  'crypto-browserify': function (alg) {
-    var createHash = require('crypto-browserify').createHash
-    return function (data) {
-      return createHash(alg).update(data).digest('hex')
-    }
-  },
   forge: function (alg) {
     var forge = require('node-forge')()
     return function (data) {
@@ -47,9 +41,9 @@ var libs = {
   },
 
   node: function (alg) {
-    var crypto = require('crypto')
+    var createHash = require('crypto').createHash
     return function (data) {
-      return crypto.createHash(alg).update(data).digest('hex')
+      return createHash(alg).update(data).digest('hex')
     }
   },
   jshashes: function (alg) {
